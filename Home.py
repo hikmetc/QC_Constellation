@@ -5,7 +5,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="QC Constellation",
-    page_icon="📈",
+    page_icon="./images/QC constellationicon(1).ico",
     layout="wide"
 )
 
