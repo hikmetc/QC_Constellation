@@ -12,7 +12,7 @@ import plotly.subplots as sp
 from scipy.stats import norm
 
 
-st.markdown("#### **:blue[Sigma-metric & Method Decision Charts]**")
+st.markdown("### **:blue[Sigma-metric & Method Decision Charts]**")
 st.write(" ")
 def round_half_up(n, decimals=0):
             multiplier = 10**decimals
