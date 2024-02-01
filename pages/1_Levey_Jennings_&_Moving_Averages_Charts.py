@@ -40,7 +40,7 @@ with st.sidebar:
         # data of analyte selection
         analyte_data, analyte_name_box = process_file(uploaded_file)
 
-st.markdown("##### **:blue[Levey-Jennings & Moving Averages Charts]**")
+st.markdown("### **:blue[Levey-Jennings & Moving Averages Charts]**")
 st.markdown(' ')
 
 # Enter the number of rows for the dataframe
