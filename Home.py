@@ -10,6 +10,7 @@ st.set_page_config(
 )
 
 with st.sidebar:
+    st.image('./images/QC Constellation icon.png')
     #st.markdown('---')
     st.info('*Developed by Hikmet Can Çubukçu, MD, EuSpLM* <hikmetcancubukcu@gmail.com>')
     
