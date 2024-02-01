@@ -13,8 +13,8 @@ with st.sidebar:
     #st.markdown('---')
     st.info('*Developed by Hikmet Can Çubukçu, MD, EuSpLM* <hikmetcancubukcu@gmail.com>')
     
-st.write("# :blue[QC Constellation]")
-
+#st.write("# :blue[QC Constellation]")
+st.image('./images/QC Constellation icon.png')
 st.write(" ")
 
 instructions = """
