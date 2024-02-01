@@ -39,6 +39,9 @@ with st.sidebar:
     if uploaded_file is not None:
         # data of analyte selection
         analyte_data, analyte_name_box = process_file(uploaded_file)
+    st.image('./images/QC Constellation icon.png')
+    st.info('*Developed by Hikmet Can Çubukçu, MD, EuSpLM* <hikmetcancubukcu@gmail.com>')
+    
 
 st.markdown("### **:blue[Levey-Jennings & Moving Averages Charts]**")
 st.markdown(' ')
