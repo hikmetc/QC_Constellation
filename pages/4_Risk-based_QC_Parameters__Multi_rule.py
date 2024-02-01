@@ -11,7 +11,10 @@ import plotly.express as px
 import plotly.subplots as sp
 from scipy.stats import norm
 
-
+with st.sidebar:
+    st.image('./images/QC Constellation icon.png')
+    st.info('*Developed by Hikmet Can Çubukçu, MD, EuSpLM* <hikmetcancubukcu@gmail.com>')
+    
 st.markdown("### **:blue[Risk-based QC Parameters: Multi Rule Scheme]**")
 st.write(" ")
 def round_half_up(n, decimals=0):
