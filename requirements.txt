@@ -6,4 +6,3 @@ seaborn==0.12.2
 openpyxl==3.0.10
 plotly==5.9.0
 scipy==1.11.2
-stdqm
