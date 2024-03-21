@@ -10,9 +10,9 @@ st.set_page_config(
 )
 
 with st.sidebar:
-    st.image('./images/QC Constellation icon.png')
+    st.image('./images/QC_Constellation_sidebar.png')
     #st.markdown('---')
-    st.info('*Developed by Hikmet Can Çubukçu, MD, EuSpLM* <hikmetcancubukcu@gmail.com>')
+    st.info('*Developed by Hikmet Can Çubukçu, MD, MSc, EuSpLM* <hikmetcancubukcu@gmail.com>')
     
 #st.write("# :blue[QC Constellation]")
 st.image('./images/QC Constellation icon.png')
