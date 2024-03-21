@@ -1,3 +1,4 @@
 [theme]
-base="light"
-layout="wide"
+backgroundColor="#020000"
+secondaryBackgroundColor="#00275e"
+textColor="#ffffff"
