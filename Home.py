@@ -30,8 +30,9 @@ measurements and method decision charts play a crucial role in evaluating analyt
 QC Constellation leverages these tools, ensuring their optimal use based on the specific performance 
 of analytical methods and the associated patient risks.
 
-We incorporate traditional Westgard rules, trend detection methods like EWMA and CUSUM, and 
-the Six Sigma methodology for comprehensive performance evaluation. Our application's core lies 
+QC Constellation incorporates traditional Westgard rules, trend detection methods like EWMA and CUSUM, and 
+the Six Sigma methodology for comprehensive performance evaluation. Furthermore, moving averages charts 
+adapted for patient-based QC and its optimization tool are both available. Our application's core lies 
 in its ability to make these sophisticated practices accessible and actionable for laboratory professionals 
 in a risk-based manner.
 """
