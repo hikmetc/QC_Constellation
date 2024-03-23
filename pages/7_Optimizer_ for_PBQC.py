@@ -13,7 +13,13 @@ from scipy import stats
 import statistics
 from stqdm import stqdm
 
+st.markdown("#### **:blue[Optimize Parameters of Moving Averages Charts for Patient Based Quality Control]**")
 
+st.write("---")
+
+st.info('**Desktop application download link for Windows:** [Optimizer-4-PBQC.exe](https://drive.google.com/file/d/1jOCSbMrqBvkCLgFpGjR71Se0j57XrlQE/view?usp=sharing)')
+
+comment_out = """
 with st.sidebar:
     with open('./template/Na_normal.xlsx', "rb") as template_file:
         template_byte = template_file.read()
@@ -1079,5 +1085,5 @@ with tab2:
                             | **:black[Standard Deviation]** | **{round(std_dev,2)}** |
                             """)
 
-
+"""
 
