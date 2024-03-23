@@ -338,7 +338,7 @@ st.markdown("---")
 
 
 # Further QC parameters
-st.markdown("##### **:blue[Further QC Parameters based on Systematic error (%) at MaxE(Nuf)]**")
+st.markdown("##### **:blue[Further QC Parameters based on Systematic error at MaxE(Nuf)]**")
 
 # Assign SE at Max Enuf 
 SE_of_concern_maxenuf = round_half_up(abs(systematic_error_at_MaxENuf/imprecision_input),2)
