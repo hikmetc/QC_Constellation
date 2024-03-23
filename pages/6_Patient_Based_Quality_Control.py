@@ -13,12 +13,12 @@ from scipy import stats
 
 
 with st.sidebar:
-    with open('./template/Na_normal.xlsx', "rb") as template_file:
+    with open('./template/Na_normal_20_pbqc_plot.xlsx', "rb") as template_file:
         template_byte = template_file.read()
     # download template excel file
     st.download_button(label="Click to Download Template File",
                         data=template_byte,
-                        file_name="Na_normal.xlsx",
+                        file_name="Na_normal_20_pbqc_plot.xlsx",
                         mime='application/octet-stream')
       # upload file
     uploaded_file = st.file_uploader('#### **Upload your .xlsx (Excel) or .csv file:**', type=['csv','xlsx'], accept_multiple_files=False)
