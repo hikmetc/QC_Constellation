@@ -13,6 +13,12 @@ from scipy import stats
 import statistics
 from stqdm import stqdm
 
+
+with st.sidebar:
+    st.image('./images/QC_Constellation_sidebar.png')
+    st.info('*Developed by Hikmet Can Çubukçu, MD, MSc, EuSpLM* <hikmetcancubukcu@gmail.com>')
+    
+    
 st.markdown("#### **:blue[Optimize Parameters of Moving Averages Charts for Patient Based Quality Control]**")
 
 st.write("---")
