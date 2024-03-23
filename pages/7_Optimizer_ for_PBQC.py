@@ -568,12 +568,15 @@ with tab1:
 
             mean = np.mean(renewable_data)
             std_dev = np.std(renewable_data)
-            st.markdown(f"""
-                            | *:green[Data statistics]* | *:green[Value]* |
-                            | ----------- | ----------- |
-                            | **:black[Mean]** | **{round(mean,2)}** |
-                            | **:black[Standard Deviation]** | **{round(std_dev,2)}** |
-                            """)
+"""            
+#            st.markdown(f"""
+ #                           | *:green[Data statistics]* | *:green[Value]* |
+  #                          | ----------- | ----------- |
+   #                         | **:black[Mean]** | **{round(mean,2)}** |
+    #                        | **:black[Standard Deviation]** | **{round(std_dev,2)}** |
+     #                       """)
+
+commment_out_2 = """
 with tab2:
     # Check if the data is uploaded or not
     if uploaded_file is None:
@@ -1078,12 +1081,13 @@ with tab2:
             st.write("---")
             mean = np.mean(renewable_data)
             std_dev = np.std(renewable_data)
-            st.markdown(f"""
-                            | *:green[Data statistics]* | *:green[Value]* |
-                            | ----------- | ----------- |
-                            | **:black[Mean]** | **{round(mean,2)}** |
-                            | **:black[Standard Deviation]** | **{round(std_dev,2)}** |
-                            """)
+"""            
+#            st.markdown(f"""
+ #                           | *:green[Data statistics]* | *:green[Value]* |
+  #                          | ----------- | ----------- |
+   #                         | **:black[Mean]** | **{round(mean,2)}** |
+    #                        | **:black[Standard Deviation]** | **{round(std_dev,2)}** |
+     #                       """)
 
-"""
+
 
