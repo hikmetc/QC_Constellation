@@ -51,7 +51,6 @@ st.write("---")
 
 # Check if the data is uploaded or not
 if uploaded_file is None:
-     st.info('**Desktop application download link for Windows:** [Optimizer-4-PBQC.exe](https://drive.google.com/file/d/1jOCSbMrqBvkCLgFpGjR71Se0j57XrlQE/view?usp=sharing)')
     st.info("**Please firstly upload your data**", icon = "ℹ️")
 
 else:
