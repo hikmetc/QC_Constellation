@@ -16,4 +16,4 @@ the Six Sigma methodology for comprehensive performance evaluation. Our applicat
 in its ability to make these sophisticated practices accessible and actionable for laboratory professionals 
 in a risk-based manner.
 
-https://hikmetc-qcconstellation.streamlit.app/ 
+Web application link: https://hikmetc-qcconstellation.streamlit.app/ 
