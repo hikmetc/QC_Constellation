@@ -16,4 +16,7 @@ the Six Sigma methodology for comprehensive performance evaluation. Our applicat
 in its ability to make these sophisticated practices accessible and actionable for laboratory professionals 
 in a risk-based manner.
 
-Web application link: https://hikmetc-qcconstellation.streamlit.app/ 
+**Web application link:** https://hikmetc-qcconstellation.streamlit.app/ 
+
+**Desktop application of Optimizer for Partient-based QC; download link for Windows:** [Optimizer-4-PBQC.exe](https://drive.google.com/file/d/1jOCSbMrqBvkCLgFpGjR71Se0j57XrlQE/view?usp=sharing)
+
