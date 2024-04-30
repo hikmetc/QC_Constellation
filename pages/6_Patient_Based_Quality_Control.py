@@ -52,6 +52,7 @@ st.write("---")
 # Check if the data is uploaded or not
 if uploaded_file is None:
     st.info("**Please firstly upload your data**", icon = "ℹ️")
+    st.info("In order to ensure the smooth functioning of our patient-based Quality Control (QC) module and prevent potential overload in the analysis process, we kindly request that you to refrain from including unnecessary Protected Health Information (PHI) when uploading for patient-based QC. Uploaded data is temporarily stored in random access memory (RAM) and automatically deleted after each session or website refresh for security.", icon = "ℹ️")
 
 else:
     try:
