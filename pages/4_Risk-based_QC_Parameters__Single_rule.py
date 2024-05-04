@@ -124,7 +124,6 @@ unreliable_results_percentage_list = [e_NU*100/e_Np for e_NU, e_Np in zip(e_NU__
 e_Nuf_list = [dif*((ARL_ed-1)*e_NB_list_e-(1-Ped_P1)*(e_NB_list_e-e_N0_list_e)) for dif, ARL_ed, Ped_P1, e_N0_list_e, e_NB_list_e in zip(delta_PE_list, ARLed, Ped_for_QC_rule_P1, e_N0_list, e_NB_list)] 
 
 # E(Nuc) Number of correctable unreliable results
-# =(B15*B17+(1-B15)*$B$8)*B21
 e_Nuc_list = [(Ped_for_QC_rule_P1_f*e_N0_list_f+(1-Ped_for_QC_rule_P1_f)*e_NB_list_f)*delta_PE_list_f for Ped_for_QC_rule_P1_f, e_N0_list_f, e_NB_list_f, delta_PE_list_f in zip(Ped_for_QC_rule_P1, e_N0_list, e_NB_list, delta_PE_list)]
 
 # Max E(Nuf) 
