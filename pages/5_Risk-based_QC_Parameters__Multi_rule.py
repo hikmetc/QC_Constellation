@@ -274,9 +274,9 @@ else:
     else:
         st.info(f'**Number of patient samples between planned QCs are plausible to reach acceptable MaxE(Nuf).**')
 
-if probability_of_false_rejection_Pfr_for_QC_rules > 5 and number_of_QCs > 1:
+if probability_of_false_rejection_Pfr_for_QC_rules > 0.5 and number_of_QCs > 1:
     st.error(f'**Unnacceptable Pfr ({round_half_up(probability_of_false_rejection_Pfr_for_QC_rules*100,2)}%) Try to another multirule or reduce number of QC measurements to achieve acceptable Pfr (<5%)**')
-elif probability_of_false_rejection_Pfr_for_QC_rules > 5 and number_of_QCs == 1:
+elif probability_of_false_rejection_Pfr_for_QC_rules > 0.5 and number_of_QCs == 1:
     st.error("**Try another multirule to reduce Pfr to acceptable levels (<5%)**")
 else:
     st.success("**Pfr values are within acceptable range (<5%)**")
