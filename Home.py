@@ -38,6 +38,6 @@ in a risk-based manner.
 """
 st.markdown(instructions)
 
-st.info("""**Please cite:** *Çubukçu, Hikmet Can. "QC Constellation: a cutting-edge solution for risk 
-and patient-based quality control in clinical laboratories" Clinical Chemistry and Laboratory Medicine 
-(CCLM), 2024. https://doi.org/10.1515/cclm-2024-0156*""")
+st.info("""**Please cite:** *Çubukçu HC. QC Constellation: a cutting-edge solution for risk and 
+patient-based quality control in clinical laboratories. Clin Chem Lab Med. 2024 May 31. 
+doi: 10.1515/cclm-2024-0156. Epub ahead of print. PMID: 38814734.*""")
