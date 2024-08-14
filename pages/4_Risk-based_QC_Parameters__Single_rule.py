@@ -217,7 +217,7 @@ st.markdown("##### **:blue[Risk based QC Parameters]**")
 st.markdown(f"""   
                     | *:green[Parameter]* | *:green[Value]* |
                     | ----------- | ----------- |
-                    | **:black[Probability of false rejection (%)]** | **{round_half_up(probability_of_false_rejection_Pfr_for_QC_rules*100,2)}** |
+                    | **:[Probability of false rejection (%)]** | **{round_half_up(probability_of_false_rejection_Pfr_for_QC_rules*100,2)}** |
                     | **:black[Sigma-metric value]** | **{round_half_up(sigma_value,2)}** |
                     | **:black[Systematic error (%) at MaxE(Nuf)]** | **{abs(round_half_up(systematic_error_at_MaxENuf,2))}** |
                     | **:black[MaxE(Nuf)]** | **{round_half_up(max_eNuf,2)}** |
