@@ -218,10 +218,10 @@ st.markdown(f"""
                     | *:green[Parameter]* | *:green[Value]* |
                     | ----------- | ----------- |
                     | **Probability of false rejection (%)** | **{round_half_up(probability_of_false_rejection_Pfr_for_QC_rules*100,2)}** |
-                    | **:black[Sigma-metric value]** | **{round_half_up(sigma_value,2)}** |
-                    | **:black[Systematic error (%) at MaxE(Nuf)]** | **{abs(round_half_up(systematic_error_at_MaxENuf,2))}** |
-                    | **:black[MaxE(Nuf)]** | **{round_half_up(max_eNuf,2)}** |
-                    | **:black[Max run size]** | **{max_run_size_result}** |
+                    | **Sigma-metric value** | **{round_half_up(sigma_value,2)}** |
+                    | **Systematic error (%) at MaxE(Nuf)** | **{abs(round_half_up(systematic_error_at_MaxENuf,2))}** |
+                    | **MaxE(Nuf)** | **{round_half_up(max_eNuf,2)}** |
+                    | **Max run size** | **{max_run_size_result}** |
                         
                 """)
 
@@ -281,11 +281,11 @@ RMI = np.mean(prob_harm)/acceptable_prob_harm
 st.markdown(f"""   
                     | *:green[Parameter]* | *:green[Value]* |
                     | ----------- | ----------- |
-                    | **:black[Probability of harm]** | **{format(np.mean(prob_harm), '.12f')}** |
-                    | **:black[Acceptable probability of harm]** | **{format(acceptable_prob_harm, '.6f')}** |
-                    | **:black[Risk management index]** | **{format(RMI, '.6f')}** |
-                    | **:black[Systematic error (%) at Max RMI]** | **{round_half_up(SE_at_max_prob_harm,2)}** |
-                    | **:black[Systematic error (as multiples of SD) at Max RMI]** | **{round_half_up(SE_at_max_prob_harm,2)/imprecision_input}** |                        
+                    | **Probability of harm** | **{format(np.mean(prob_harm), '.12f')}** |
+                    | **Acceptable probability of harm** | **{format(acceptable_prob_harm, '.6f')}** |
+                    | **Risk management index** | **{format(RMI, '.6f')}** |
+                    | **Systematic error (%) at Max RMI** | **{round_half_up(SE_at_max_prob_harm,2)}** |
+                    | **Systematic error (as multiples of SD) at Max RMI** | **{round_half_up(SE_at_max_prob_harm,2)/imprecision_input}** |                        
                 """)
 st.write(" ")
 if RMI > 1:
@@ -349,16 +349,16 @@ e_Nuc_sv = (Ped_P1_value*e_N0+(1-Ped_P1_value)*e_NB)*delta_p_exceed_TEa
 st.markdown(f"""   
                     | *:green[Parameter]* | *:green[Value]* |
                     | ----------- | ----------- |
-                    | **:black[Probability of error detection]** | **{round(Ped_P1_value, 3)}** |
-                    | **:black[Expected number of QC events to detect a systematic error]** | **{round(e_QCE, 2)}** |
-                    | **:black[Average expected number of patient samples processed from the onset of the out-of-control condition to QC detection]** | **{round(e_Nq)}** |
-                    | **:black[Probability of generating a result that exceeds the systematic error of {SE_of_concern} (as multiples of SD) during in-control state]** | **{ '<0.000001' if p_TEa_exceed_in_control < 0.000001 else format(p_TEa_exceed_in_control, '.6f')}** |
-                    | **:black[Probability of generating a result that exceeds the systematic error of {SE_of_concern} (as multiples of SD) when an error exists]** | **{round(p_TEa_exceed_out_control, 4)}** |
-                    | **:black[Increase in the probability of generating a result that exceeds the systematic error of {SE_of_concern} due to the out-of-control condition]** | **{round(delta_p_exceed_TEa, 4)}** |
-                    | **:black[Expected number of unreliable results (E(Nu))]** | **{round(e_NU_sv, 2)}** |
-                    | **:black[Percentage of unreliable results % (UnR%)]** | **{round(UnR_percentage, 2)}** |
-                    | **:black[Number of unreliable results produced between the onset of the out-of-control condition and the last accepted QC event (E(Nuf))]** | **{round(e_Nuf_sv, 2)}** |
-                    | **:black[Number of correctable unreliable results between the last accepted QC event and the QC event detected the out-of-control condition (E(Nuc))]** | **{round(e_Nuc_sv, 2)}** |
+                    | **Probability of error detection** | **{round(Ped_P1_value, 3)}** |
+                    | **Expected number of QC events to detect a systematic error** | **{round(e_QCE, 2)}** |
+                    | **Average expected number of patient samples processed from the onset of the out-of-control condition to QC detection** | **{round(e_Nq)}** |
+                    | **Probability of generating a result that exceeds the systematic error of {SE_of_concern} (as multiples of SD) during in-control state** | **{ '<0.000001' if p_TEa_exceed_in_control < 0.000001 else format(p_TEa_exceed_in_control, '.6f')}** |
+                    | **Probability of generating a result that exceeds the systematic error of {SE_of_concern} (as multiples of SD) when an error exists** | **{round(p_TEa_exceed_out_control, 4)}** |
+                    | **Increase in the probability of generating a result that exceeds the systematic error of {SE_of_concern} due to the out-of-control condition** | **{round(delta_p_exceed_TEa, 4)}** |
+                    | **Expected number of unreliable results (E(Nu))** | **{round(e_NU_sv, 2)}** |
+                    | **Percentage of unreliable results % (UnR%)** | **{round(UnR_percentage, 2)}** |
+                    | **Number of unreliable results produced between the onset of the out-of-control condition and the last accepted QC event (E(Nuf))** | **{round(e_Nuf_sv, 2)}** |
+                    | **Number of correctable unreliable results between the last accepted QC event and the QC event detected the out-of-control condition (E(Nuc))** | **{round(e_Nuc_sv, 2)}** |
                         
                 """)
 
