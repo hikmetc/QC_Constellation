@@ -43,7 +43,7 @@ with st.sidebar:
     st.info('*Developed by Hikmet Can Çubukçu, MD, MSc, EuSpLM* <hikmetcancubukcu@gmail.com>')
     
 
-st.markdown("### **:blue[Levey-Jennings & Moving Averages Charts]**")
+st.markdown("### **:blue[Levey-Jennings Chart]**")
 st.markdown(' ')
 
 # Enter the number of rows for the dataframe
