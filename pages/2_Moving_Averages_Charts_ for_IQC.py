@@ -287,9 +287,9 @@ try:
             st.markdown(f"""
                         | *:green[Analytical Performance Characteristics]* | *:green[Value]* |
                         | ----------- | ----------- |
-                        | **:black[Mean]** | **{round_half_up(mean,2)}** |
-                        | **:black[Standard Deviation]** | **{round_half_up(std_dev,2)}** |
-                        | **:black[Coefficient of Variation (CV)]** | **{round_half_up((std_dev*100/mean),2)}** |
+                        | **Mean** | **{round_half_up(mean,2)}** |
+                        | **Standard Deviation** | **{round_half_up(std_dev,2)}** |
+                        | **Coefficient of Variation (CV)** | **{round_half_up((std_dev*100/mean),2)}** |
                         """)
         except ZeroDivisionError as ze:
             st.error('Mean value can not be "0"') 
