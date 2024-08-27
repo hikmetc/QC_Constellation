@@ -42,6 +42,8 @@ st.info("""**Please cite:** *Çubukçu HC. QC Constellation: a cutting-edge solu
 patient-based quality control in clinical laboratories. Clin Chem Lab Med. 2024 May 31. 
 doi: 10.1515/cclm-2024-0156. Epub ahead of print. PMID: 38814734.*""")
 
+st.write(" ")
 
+st.markdown("### **:blue[Tutorial]**")
 VIDEO_URL = "https://youtu.be/Zais8zl6m3s"
 st.video(VIDEO_URL)
