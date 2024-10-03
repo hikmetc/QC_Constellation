@@ -22,23 +22,24 @@ with st.sidebar:
                         mime='application/octet-stream')
       # upload file
     uploaded_file = st.file_uploader('#### **Upload your .xlsx (Excel) or .csv file:**', type=['csv','xlsx'], accept_multiple_files=False)
-    
-    def process_file(file):
-        # data of analyte selection
+            
+    @st.cache_data
+    def load_file(file):
+        # Load the uploaded file
         try:
-            uploaded_file = pd.read_excel(file)
+            df = pd.read_excel(file)
         except:
-            uploaded_file = pd.read_csv(file, sep=None, engine='python')
-        analyte_name_box = st.selectbox("**Select IQC result Column**", tuple(uploaded_file.columns))
-        analyte_data = uploaded_file[analyte_name_box]
-        analyte_data = analyte_data.dropna(axis=0).reset_index()
-        analyte_data = analyte_data[analyte_name_box]
-        return analyte_data, analyte_name_box
+            df = pd.read_csv(file, sep=None, engine='python')
+        return df
 
-    # column name (data) selection
     if uploaded_file is not None:
-        # data of analyte selection
-        analyte_data, analyte_name_box = process_file(uploaded_file)
+        # Load data outside of the widget function
+        df = load_file(uploaded_file)
+        # Use st.selectbox outside the cached function
+        analyte_name_box = st.selectbox("**Select IQC result Column**", df.columns)
+        # Process the selected column
+        analyte_data = df[analyte_name_box].dropna().reset_index(drop=True)
+        
     st.image('./images/QC_Constellation_sidebar.png')
     st.info('*Developed by Hikmet Can Çubukçu, MD, MSc, EuSpLM* <hikmetcancubukcu@gmail.com>')
     
