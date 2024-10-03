@@ -23,7 +23,7 @@ with st.sidebar:
       # upload file
     uploaded_file = st.file_uploader('#### **Upload your .xlsx (Excel) or .csv file:**', type=['csv','xlsx'], accept_multiple_files=False)
     
-
+    @st.cache_data
     def process_file(file):
         # data of analyte selection
         try:
