@@ -22,25 +22,7 @@ with st.sidebar:
                         mime='application/octet-stream')
       # upload file
     uploaded_file = st.file_uploader('#### **Upload your .xlsx (Excel) or .csv file:**', type=['csv','xlsx'], accept_multiple_files=False)
-    """
-    @st.cache_data
-    def process_file(file):
-        # data of analyte selection
-        try:
-            uploaded_file = pd.read_excel(file)
-        except:
-            uploaded_file = pd.read_csv(file, sep=None, engine='python')
-        analyte_name_box = st.selectbox("**Select patient results column**", tuple(uploaded_file.columns))
-        analyte_data = uploaded_file[analyte_name_box]
-        analyte_data = analyte_data.dropna(axis=0).reset_index()
-        analyte_data = analyte_data[analyte_name_box]
-        return analyte_data, analyte_name_box
-
-    # column name (data) selection
-    if uploaded_file is not None:
-        # data of analyte selection
-        analyte_data, analyte_name_box = process_file(uploaded_file)
-    """    
+    
     @st.cache_data
     def load_file(file):
         # Load the uploaded file
