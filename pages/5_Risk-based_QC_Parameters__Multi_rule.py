@@ -241,8 +241,8 @@ st.markdown("**E(QCE):** Expected number of QC events to detect a systematic err
 max_run_size_result = (e_NB / max_eNuf) * (patient_risk_factor_input)
 
 # Apply the conditions
-if max_run_size_result > 10000:
-    max_run_size_result = ">10000"
+if max_run_size_result > 20000:
+    max_run_size_result = ">20000"
 elif max_run_size_result < 1:
     max_run_size_result = "<1"
 else:
