@@ -22,7 +22,7 @@ def round_half_up(n, decimals=0):
     return math.floor(n * multiplier + 0.5) / multiplier
 # Pfr calculation of single rule
 col1, col2 = st.columns([1,1])
-QC_rules_1ks = col1.number_input('**:blue[1ks QC rule]**', min_value=2.0, max_value=5.0, step = 0.1)
+QC_rules_1ks = col1.number_input('**:blue[1ks QC rule]**', min_value=2.0, max_value=10.0, step = 0.1)
 number_of_QCs = col2.number_input('**:blue[Number of QC]**', min_value=1 , max_value=12 , step = 1)
 probability_of_false_rejection_Pfr_for_QC_rules = 1 - ((norm.cdf(QC_rules_1ks) - norm.cdf(-QC_rules_1ks)) ** number_of_QCs)
 
