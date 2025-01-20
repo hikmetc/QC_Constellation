@@ -18,5 +18,5 @@ in a risk-based manner.
 
 **QC Constellation; web application link:** https://hikmetc-qcconstellation.streamlit.app/ 
 
-**Desktop application of Optimizer for Patient-based QC; download link for Windows:** [Optimizer-4-PBQC.exe](https://drive.google.com/file/d/1ygmiuxKGnqfuG6XaJC55BF_UCPZSNnAo/view?usp=sharing)
+**Desktop application of Optimizer for Patient-based QC; download link for Windows:** [Optimizer-4-PBQC.exe](https://drive.google.com/file/d/1nNtCXfHDpgUiW2tOfSDqdjexjEHJSW24/view?usp=sharing)
 
