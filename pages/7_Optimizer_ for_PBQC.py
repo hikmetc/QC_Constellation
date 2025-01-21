@@ -23,7 +23,7 @@ st.markdown("#### **:blue[Optimize Parameters of Moving Averages Charts for Pati
 
 st.write("---")
 
-st.info('**Desktop application download link for Windows:** [Optimizer-4-PBQC.exe](https://drive.google.com/file/d/1ygmiuxKGnqfuG6XaJC55BF_UCPZSNnAo/view?usp=sharing)')
+st.info('**Desktop application download link for Windows:** [Optimizer-4-PBQC.exe](https://drive.google.com/file/d/1nNtCXfHDpgUiW2tOfSDqdjexjEHJSW24/view?usp=sharing)')
 
 comment_out = """
 with st.sidebar:
