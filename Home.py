@@ -6,7 +6,8 @@ import streamlit as st
 st.set_page_config(
     page_title="QC Constellation",
     page_icon="🌌",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"                           # slim white gutter L/R
 )
 
 with st.sidebar:
