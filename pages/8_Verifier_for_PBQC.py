@@ -157,7 +157,7 @@ def run_cusum(raw, day, lo, hi, transform, h,
 ##############################################################################
 # -------------------------------  UI LAYOUT  ------------------------------ #
 ##############################################################################
-st.set_page_config(page_title="Patient-based QC optimiser", layout="wide")
+st.set_page_config(page_title="Patient-based QC verifier", layout="wide")
 st.markdown("#### **:blue[Verify Moving Average Charts for Patient-Based QC]**")
 st.write("---")
 
