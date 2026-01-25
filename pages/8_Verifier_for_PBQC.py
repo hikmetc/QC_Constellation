@@ -68,7 +68,7 @@ def plot_anped(errs, anpeds, mnpeds, title):
     fig.update_layout(title=title, xaxis_title="Error Rate (%)",
                       yaxis_title="ANPed / MNPed",
                       title_font=dict(color="#cc0000"))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 
 ##############################################################################
@@ -283,5 +283,5 @@ with tab_cusum:
                    f"CUSUM – ANPed / MNPed vs error rate (±{TEa_user_c} %)")
 
 ##############################################################################
-st.sidebar.image("./images/QC Constellation icon.png", use_container_width=True)
+st.sidebar.image("./images/QC Constellation icon.png", width='stretch')
 st.sidebar.info("*Developed by Hikmet Can Çubukçu, MD, MSc, PhD, EuSpLM*  \n<hikmetcancubukcu@gmail.com>")
