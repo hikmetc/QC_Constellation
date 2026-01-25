@@ -91,7 +91,16 @@ def run_ewma(raw, day, lo, hi, transform, block,
                 continue
             if err_flag and len(sub) > error_pt:
                 sub.iloc[error_pt:] *= 1 + TEa / 100
-            ewma = sub.ewm(span=block, adjust=False).mean()
+            # Initialize with target_mean for consistency with the intended optimizer logic
+            alpha = 2.0 / (block + 1.0)
+            ewma_list = []
+            curr_ewma = target_mean
+            for val in sub:
+                curr_ewma = (1.0 - alpha) * curr_ewma + alpha * val
+                ewma_list.append(curr_ewma)
+            
+            ewma = pd.Series(ewma_list)
+            
             out_hi = ewma >= UCL
             out_lo = ewma <= LCL
             if out_hi.any() or out_lo.any():
@@ -157,7 +166,7 @@ def run_cusum(raw, day, lo, hi, transform, h,
 ##############################################################################
 # -------------------------------  UI LAYOUT  ------------------------------ #
 ##############################################################################
-st.set_page_config(page_title="Patient-based QC verifier")
+st.set_page_config(page_title="Patient-based QC optimiser", layout="wide")
 st.markdown("#### **:blue[Verify Moving Average Charts for Patient-Based QC]**")
 st.write("---")
 
@@ -274,5 +283,5 @@ with tab_cusum:
                    f"CUSUM – ANPed / MNPed vs error rate (±{TEa_user_c} %)")
 
 ##############################################################################
-st.sidebar.image("./images/QC Constellation icon.png")
+st.sidebar.image("./images/QC Constellation icon.png", use_column_width=True)
 st.sidebar.info("*Developed by Hikmet Can Çubukçu, MD, MSc, PhD, EuSpLM*  \n<hikmetcancubukcu@gmail.com>")
