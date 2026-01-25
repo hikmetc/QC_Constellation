@@ -367,5 +367,5 @@ with tab_cusum:
                    f"CUSUM – ANPed / MNPed vs error rate (±{TEa_user_c} %)")
 
 ##############################################################################
-st.sidebar.image("./images/QC Constellation icon.png", use_column_width=True)
+st.sidebar.image("./images/QC Constellation icon.png", use_container_width=True)
 st.sidebar.info("*Developed by Hikmet Can Çubukçu, MD, MSc, PhD, EuSpLM*  \n<hikmetcancubukcu@gmail.com>")
