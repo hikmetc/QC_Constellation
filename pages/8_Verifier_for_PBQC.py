@@ -1,81 +1,15 @@
 # patient_qc_app.py
 # Developed by Hikmet Can Çubukçu – user-defined TEa added 2025-07-13
-# Revised 2026-01-25 for full compatibility with Rust Desktop App v1.0.8
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+from scipy import stats
 import statistics
 
 ##############################################################################
 # -------------------------------- HELPERS --------------------------------- #
 ##############################################################################
-
-# Custom Box-Cox implementation to match Rust Desktop App (Golden Section Search)
-def custom_boxcox_rust_style(data):
-    # Clean data (ensure numpy array)
-    data = np.array(data, dtype=float)
-    n = float(len(data))
-    sum_ln_x = np.sum(np.log(data))
-
-    def cost_function(l):
-        if abs(l) < 1e-9:
-            y = np.log(data)
-        else:
-            y = (np.power(data, l) - 1.0) / l
-        
-        mean_y = np.mean(y)
-        # Using population variance (N) or Sample (N-1)?
-        # Rust `stats.rs`: let variance = (transformed_sq_sum / n) - (mean * mean);
-        # This is Population Variance (div by N).
-        # numpy var default is population (ddof=0).
-        variance = np.var(y)
-        
-        if variance <= 0.0:
-            return float('inf')
-        
-        # Negative Log-Likelihood
-        return (n / 2.0) * np.log(variance) - (l - 1.0) * sum_ln_x
-
-    # Golden Section Search [-5.0, 5.0]
-    a, b = -5.0, 5.0
-    tol = 1e-4
-    phi = (1.0 + np.sqrt(5.0)) / 2.0
-    resphi = 2.0 - phi
-
-    c = a + resphi * (b - a)
-    d = b - resphi * (b - a)
-    fc = cost_function(c)
-    fd = cost_function(d)
-
-    for _ in range(100):
-        if abs(b - a) < tol:
-            break
-        if fc < fd:
-            b = d
-            d = c
-            fd = fc
-            c = a + resphi * (b - a)
-            fc = cost_function(c)
-        else:
-            a = c
-            c = d
-            fc = fd
-            d = b - resphi * (b - a)
-            fd = cost_function(d)
-    
-    optimal_lambda = (a + b) / 2.0
-
-    # Transform with optimal lambda
-    if abs(optimal_lambda) < 1e-9:
-        fitted = np.log(data)
-    else:
-        fitted = (np.power(data, optimal_lambda) - 1.0) / optimal_lambda
-    
-    return pd.Series(fitted), optimal_lambda
-
-
 def get_uploaded_data():
     with st.sidebar:
         with open("./template/Na_normal.xlsx", "rb") as f:
@@ -106,8 +40,8 @@ def truncate_series(s, lo, hi):
 def box_cox_if_needed(s, do_it):
     if not do_it:
         return s
-    fitted, _ = custom_boxcox_rust_style(s)
-    return fitted
+    fitted, _ = stats.boxcox(s)
+    return pd.Series(fitted)
 
 
 def perf_df(value_err, value_0, anped, mnped):
@@ -157,19 +91,7 @@ def run_ewma(raw, day, lo, hi, transform, block,
                 continue
             if err_flag and len(sub) > error_pt:
                 sub.iloc[error_pt:] *= 1 + TEa / 100
-            
-            # Initialize with target_mean matches Rust Desktop App v1.0.8 logic
-            alpha = 2.0 / (block + 1.0)
-            ewma_list = []
-            curr_ewma = target_mean
-            
-            # The loop exactly matches Rust `prev_ewma = (1-a)*prev + a*val`
-            for val in sub:
-                curr_ewma = (1.0 - alpha) * curr_ewma + alpha * val
-                ewma_list.append(curr_ewma)
-            
-            ewma = pd.Series(ewma_list)
-            
+            ewma = sub.ewm(span=block, adjust=False).mean()
             out_hi = ewma >= UCL
             out_lo = ewma <= LCL
             if out_hi.any() or out_lo.any():
@@ -208,12 +130,10 @@ def run_cusum(raw, day, lo, hi, transform, h,
                 continue
             if err_flag and len(sub) > error_pt:
                 sub.iloc[error_pt:] *= 1 + TEa / 100
-            
             Cp = Cm = 0
             hit = False
             for idx, x in enumerate(sub):
                 z = (x - mu) / sd
-                # Matches Rust logic exactly: max(0, prev + z - k)
                 Cp = max(0, Cp + z - k)
                 Cm = max(0, Cm - z - k)
                 if Cp >= h or Cm >= h:
@@ -237,7 +157,7 @@ def run_cusum(raw, day, lo, hi, transform, h,
 ##############################################################################
 # -------------------------------  UI LAYOUT  ------------------------------ #
 ##############################################################################
-st.set_page_config(page_title="Patient-based QC optimiser", layout="wide")
+st.set_page_config(page_title="Patient-based QC verifier")
 st.markdown("#### **:blue[Verify Moving Average Charts for Patient-Based QC]**")
 st.write("---")
 
@@ -258,31 +178,26 @@ with tab_ewma:
         c1, c2, c3 = st.columns(3)
 
         lo_tl = c1.number_input("Lower truncation limit",
-                                value=float(raw_res.min()), format="%.8f", step=0.00000001)
+                                value=float(raw_res.min()))
         hi_tl = c1.number_input("Upper truncation limit",
-                                value=float(raw_res.max()), format="%.8f", step=0.00000001)
+                                value=float(raw_res.max()))
 
         transform = c2.radio("Transformation", ("Raw Data", "Box-Cox"))
 
-        # Initialize with reasonably high precision
-        mean_val = float(raw_res.mean())
-        std_val = float(raw_res.std())
-
         LCL = c2.number_input("Lower control limit (absolute)",
-                              value=mean_val - 2 * std_val, format="%.8f", step=0.00000001)
+                              value=float(raw_res.mean() - 2 * raw_res.std()))
         UCL = c2.number_input("Upper control limit (absolute)",
-                              value=mean_val + 2 * std_val, format="%.8f", step=0.00000001)
+                              value=float(raw_res.mean() + 2 * raw_res.std()))
 
         block = c3.number_input("EWMA block size (span)",
                                 value=20, min_value=2, step=1)
 
         target_mean = c3.number_input("Target mean",
-                                      value=mean_val, format="%.8f", step=0.00000001)
-        prev_sd = c3.number_input("Previous SD", 
-                                  value=std_val, format="%.8f", step=0.00000001)
+                                      value=float(raw_res.mean()))
+        prev_sd = c3.number_input("Previous SD", value=float(raw_res.std()))
 
         TEa_user = c3.number_input("Allowable error (%)",
-                                   value=5.0, min_value=0.0, step=0.000001, format="%.6f")
+                                   value=5.0, min_value=0.0, step=0.1)
 
         calc_ewma = st.form_submit_button("Calculate 🟢")
 
@@ -296,9 +211,6 @@ with tab_ewma:
 
         errs = np.arange(-TEa_user, TEa_user + 0.1 * TEa_user, 0.1 * TEa_user) if TEa_user else np.array([0])
         an_list, mn_list = [], []
-        # Filter errs near 0
-        errs = [e if abs(e) > 1e-9 else 0.0 for e in errs]
-        
         for e in errs:
             _, _, an, mn = run_ewma(
                 raw_res, raw_day, lo_tl, hi_tl, transform,
@@ -306,7 +218,7 @@ with tab_ewma:
             )
             an_list.append(an)
             mn_list.append(mn)
-        plot_anped(np.array(errs), np.array(an_list), np.array(mn_list),
+        plot_anped(errs, np.array(an_list), np.array(mn_list),
                    f"EWMA – ANPed / MNPed vs error rate (±{TEa_user} %)")
 
 # ------------------------------------------------------------------------- #
@@ -318,29 +230,26 @@ with tab_cusum:
         c1, c2, c3 = st.columns(3)
 
         lo_tl = c1.number_input("Lower truncation limit",
-                                value=float(raw_res.min()), key="lo_c", format="%.8f", step=0.00000001)
+                                value=float(raw_res.min()), key="lo_c")
         hi_tl = c1.number_input("Upper truncation limit",
-                                value=float(raw_res.max()), key="hi_c", format="%.8f", step=0.00000001)
+                                value=float(raw_res.max()), key="hi_c")
 
         transform = c2.radio("Transformation",
                              ("Raw Data", "Box-Cox"), key="tf_c")
 
         h = c2.number_input("Control limit *h*",
-                            value=10.0, format="%.8f", step=0.00000001)
+                            value=10.0, step=0.1)
 
-        mean_val = float(raw_res.mean())
-        std_val = float(raw_res.std())
-        
         target_mean = c3.number_input("Target mean",
-                                      value=mean_val, key="tm_c", format="%.8f", step=0.00000001)
+                                      value=float(raw_res.mean()), key="tm_c")
         prev_sd = c3.number_input("Previous SD",
-                                  value=std_val, key="sd_c", format="%.8f", step=0.00000001)
+                                  value=float(raw_res.std()), key="sd_c")
 
-        k_val = 0.5 # Fixed as per Rust logic
+        k_val = 0.5 # c3.number_input("Reference value *k*", value=0.5, step=0.1)
 
         TEa_user_c = c3.number_input("Allowable error (%)",
-                                     value=5.0, min_value=0.0, step=0.000001,
-                                     key="tea_c", format="%.6f")
+                                     value=5.0, min_value=0.0, step=0.1,
+                                     key="tea_c")
 
         calc_c = st.form_submit_button("Calculate 🟢")
 
@@ -354,8 +263,6 @@ with tab_cusum:
 
         errs = np.arange(-TEa_user_c, TEa_user_c + 0.1 * TEa_user_c, 0.1 * TEa_user_c) if TEa_user_c else np.array([0])
         an_list, mn_list = [], []
-        errs = [e if abs(e) > 1e-9 else 0.0 for e in errs]
-
         for e in errs:
             _, _, an, mn = run_cusum(
                 raw_res, raw_day, lo_tl, hi_tl, transform,
@@ -363,9 +270,9 @@ with tab_cusum:
             )
             an_list.append(an)
             mn_list.append(mn)
-        plot_anped(np.array(errs), np.array(an_list), np.array(mn_list),
+        plot_anped(errs, np.array(an_list), np.array(mn_list),
                    f"CUSUM – ANPed / MNPed vs error rate (±{TEa_user_c} %)")
 
 ##############################################################################
-st.sidebar.image("./images/QC Constellation icon.png", use_container_width=True)
+st.sidebar.image("./images/QC Constellation icon.png")
 st.sidebar.info("*Developed by Hikmet Can Çubukçu, MD, MSc, PhD, EuSpLM*  \n<hikmetcancubukcu@gmail.com>")
