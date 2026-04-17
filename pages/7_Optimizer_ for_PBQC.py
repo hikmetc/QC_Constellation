@@ -27,6 +27,9 @@ st.info('**Desktop application download link for Windows:** [Optimizer-4-PBQC.ex
 
 st.info('**Desktop application of Optimizer for Patient-based QC; download link for Windows:** [Optimizer4PBQC.exe](https://drive.google.com/file/d/1RppecTzDN5apLfKxRFEMI0-09HQNgpLI/view?usp=sharing)')
 st.info('**Desktop application of Optimizer for Patient-based QC; download link for Mac OS:** [Optimizer-4-PBQC.app](https://drive.google.com/file/d/1HRE1b2eylLI-VR1_Kaqd1FGEhLfk843A/view?usp=sharing)')
+st.info('**Desktop application of Optimizer for Patient-based QC; download link for Mac OS:** [Optimizer-4-PBQC.app](https://drive.google.com/drive/folders/154dCY-Ie8Gr8oY95UU67mo5Rxx3LJzQ_?usp=sharing)')
+
+
 
 
 comment_out = """
